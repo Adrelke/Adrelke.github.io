@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <title>Tapatop</title>
+</head>
+
+<body>
+    <canvas id="myCanvas" resize></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.12/howler.js"></script>
+    <script type="text/paperscript" canvas="myCanvas">
+        console.log("hello")
+        var tablo = []
+        var sounds =['bubbles', 'clay', 'confetti', 'corona', 'dotted-spiral', 'flash-1', 'flash-2', 'flash-3', 'glimmer', 'moon', 'pinwheel', 'piston-1', 'piston-2','piston-3','prism-1','prism-2','prism-3','splits','squiggle','strike','suspension','timer','ufo','veil','wipe','zig-zag'];
+        var howls = {};
+        for (var p=0; p<sounds.length; p++) {
+            howls[sounds[p]] = new Howl({
+                src: ['./assets/sounds/' + sounds[p] + '.mp3']
+            });
+        }
+
+        function onKeyDown(event) {
+
+            var myCircle = new Path.Circle(new Point(Math.floor((Math.random() * 1520)), Math.floor((Math.random() * 759))), 200);
+            myCircle.fillColor = "#"+((1<<24)*Math.random()|0).toString(16);
+            tablo.push(myCircle);
+            var sounds =['bubbles', 'clay', 'confetti', 'corona', 'dotted-spiral', 'flash-1', 'flash-2', 'flash-3', 'glimmer', 'moon', 'pinwheel', 'piston-1', 'piston-2','piston-3','prism-1','prism-2','prism-3','splits','squiggle','strike','suspension','timer','ufo','veil','wipe','zig-zag'];
+            var spotify = sounds[Math.floor(Math.random() * sounds.length)];
+            howls[spotify].play();
+        }
+        function onFrame(event){
+            for (var a = 0; a<tablo.length; a++){
+                tablo[a].fillColor.hue += 1;
+                tablo[a].scale(0.9)
+            }
+        }
+        
+
+    </script>
+    <script src="assets/js/paper-full.js"></script>
+    <!-- <script src="assets/js/howler.js"></script> -->
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
